@@ -1,4 +1,4 @@
 package data.repositeries;
 
-public class Residents {
+public class GatePass {
 }
