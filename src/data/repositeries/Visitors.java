@@ -1,12 +1,13 @@
 package data.repositeries;
 
-
 import data.models.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Visitors implements VisitorRepo {
     private List<Visitor> visitors;
+    private int id = 1;
 
 
     public Visitors(List<Visitor> visitors) {
@@ -15,15 +16,20 @@ public class Visitors implements VisitorRepo {
 
 
     @Override
-    public void save(Visitor newVisitor) {
-        for(Visitor visitor : visitors) {
-            if(visitor.getId() == newVisitor.getId()){
-                visitors.remove(visitor);
-            }
-            visitors.add(newVisitor);
+    public Visitor save(Visitor newVisitor) {
+       if(newVisitor.getId() == 0){
+           newVisitor.setId(id ++);
+           visitors.add(newVisitor);
+       }
 
-        }
+       for(int count = 0; count < visitors.size(); count++){
+           if(visitors.get(count).getId() == newVisitor.getId()){
+               visitors.remove(count);
+               visitors.add(newVisitor);
+           }
+       }
 
+       return newVisitor;
     }
 
     @Override
@@ -36,6 +42,25 @@ public class Visitors implements VisitorRepo {
         return null;
     }
 
+    @Override
+    public void delete(int id) {
+        Visitor visitor = findById(id);
+        visitors.remove(visitor);
+    }
+
+    @Override
+    public void deleteByObject(Visitor newVisitor) {
+        for(Visitor visitor : visitors){
+            if(visitor.getId() == newVisitor.getId()){
+                visitors.remove(visitor);
+            }
+        }
+    }
+
+    @Override
+    public List<Visitor> findAll() {
+        return new ArrayList<>(visitors);
+    }
 
 
 }
