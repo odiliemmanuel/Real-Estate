@@ -12,6 +12,7 @@ public interface VisitorRepo {
     void delete(int id);
     void deleteByObject(Visitor visitor);
     List<Visitor> findAll();
+    int count();
 
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface GatePassRepo {
 
+    int count();
     GatePass save(GatePass gatePass);
     GatePass findById(int id);
     void delete(int id);

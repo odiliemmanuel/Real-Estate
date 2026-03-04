@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ResidentRepo {
 
+    int count();
     Resident findById(int id);
+    Resident findByObject(Resident repository);
     Resident save(Resident repository);
     void deleteAll();
     void deleteByObject(Resident repository);

@@ -11,6 +11,12 @@ public class GatePass {
     private LocalDateTime expirationDate;
     private boolean isActive = true;
 
+    public GatePass(int id, int residentId, int visitorsId) {
+        this.id = id;
+        this.residentId = residentId;
+        this.visitorsId = visitorsId;
+
+    }
 
 
     public int getId() {

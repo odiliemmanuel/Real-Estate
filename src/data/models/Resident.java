@@ -11,6 +11,13 @@ public class Resident {
     private int id;
 
 
+    public Resident(String name, String passCode, String phoneNumber) {
+        this.name = name;
+        this.passCode = passCode;
+        this.phoneNumber = phoneNumber;
+
+
+    }
 
     public int getId() {
         return id;

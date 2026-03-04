@@ -8,6 +8,7 @@ import java.util.List;
 public class GatePasses implements GatePassRepo {
     private List<GatePass> gatePasses;
     private int id = 1;
+    private int numberOfGatePasses = 0;
 
 
     public GatePasses(List<GatePass> gatePasses) {
@@ -15,16 +16,23 @@ public class GatePasses implements GatePassRepo {
         this.gatePasses = gatePasses;
     }
 
-    
+
+    @Override
+    public int count() {
+        return numberOfGatePasses;
+    }
+
     @Override
     public GatePass save(GatePass gatePass) {
         if(gatePass.getId() == 0){
             gatePass.setId(this.id ++);
             gatePasses.add(gatePass);
+            numberOfGatePasses += 1;
         }
         else{
             delete(gatePass.getId());
             gatePasses.add(gatePass);
+            numberOfGatePasses += 1;
         }
 
         return gatePass;
@@ -32,18 +40,28 @@ public class GatePasses implements GatePassRepo {
 
         @Override
     public void delete(int id) {
+        GatePass newGatePass = null;
         for(GatePass gatePass : gatePasses){
             if(gatePass.getId() == id){
-                gatePasses.remove(gatePass);
+                newGatePass = gatePass;
+
+            }
+        }
+
+        for(int index = 0; index < gatePasses.size(); index++){
+            if(gatePasses.get(index).getId() == id){
+                gatePasses.remove(index);
+                numberOfGatePasses -= 1;
             }
         }
     }
 
     @Override
     public void deleteByObject(GatePass newGatePass) {
-        for(GatePass gatePass : gatePasses){
-            if(gatePass.getId() == newGatePass.getId()){
-                gatePasses.remove(newGatePass);
+        for(int index = 0; index < gatePasses.size(); index++){
+            if(gatePasses.get(index).getId() == id){
+                gatePasses.remove(index);
+                numberOfGatePasses -= 1;
             }
         }
     }

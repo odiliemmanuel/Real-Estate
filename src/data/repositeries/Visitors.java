@@ -8,6 +8,7 @@ import java.util.List;
 public class Visitors implements VisitorRepo {
     private List<Visitor> visitors;
     private int id = 1;
+    private int numberOfVisitors = 0;
 
 
     public Visitors(List<Visitor> visitors) {
@@ -20,6 +21,7 @@ public class Visitors implements VisitorRepo {
        if(newVisitor.getId() == 0){
            newVisitor.setId(id ++);
            visitors.add(newVisitor);
+           numberOfVisitors += 1;
        }
 
        for(int count = 0; count < visitors.size(); count++){
@@ -27,6 +29,7 @@ public class Visitors implements VisitorRepo {
                visitors.remove(count);
                visitors.add(newVisitor);
            }
+           numberOfVisitors += 1;
        }
 
        return newVisitor;
@@ -46,6 +49,7 @@ public class Visitors implements VisitorRepo {
     public void delete(int id) {
         Visitor visitor = findById(id);
         visitors.remove(visitor);
+        numberOfVisitors -= 1;
     }
 
     @Override
@@ -54,12 +58,18 @@ public class Visitors implements VisitorRepo {
             if(visitor.getId() == newVisitor.getId()){
                 visitors.remove(visitor);
             }
+            numberOfVisitors -= 1;
         }
     }
 
     @Override
     public List<Visitor> findAll() {
         return new ArrayList<>(visitors);
+    }
+
+    @Override
+    public int count() {
+        return numberOfVisitors;
     }
 
 
