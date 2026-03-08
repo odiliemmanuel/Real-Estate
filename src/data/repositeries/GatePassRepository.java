@@ -5,13 +5,13 @@ import data.models.GatePass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GatePasses implements GatePassRepo {
+public class GatePassRepository implements GatePassRepositoryImpl {
     private List<GatePass> gatePasses;
     private int id = 1;
     private int numberOfGatePasses = 0;
 
 
-    public GatePasses(List<GatePass> gatePasses) {
+    public GatePassRepository(List<GatePass> gatePasses) {
 
         this.gatePasses = gatePasses;
     }

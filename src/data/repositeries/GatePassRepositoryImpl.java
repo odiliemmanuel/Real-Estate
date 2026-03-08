@@ -1,11 +1,10 @@
 package data.repositeries;
 
 import data.models.GatePass;
-import data.models.Visitor;
 
 import java.util.List;
 
-public interface GatePassRepo {
+public interface GatePassRepositoryImpl {
 
     int count();
     GatePass save(GatePass gatePass);

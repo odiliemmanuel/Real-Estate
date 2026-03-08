@@ -5,14 +5,14 @@ import data.models.Resident;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Residents implements ResidentRepo {
+public class ResidentRepository implements ResidentRepositoryImpl {
 
     private List<Resident> residents;
     private int id = 1;
     private int numberOfResidents = 0;
 
 
-    public Residents(List<Resident> residents) {
+    public ResidentRepository(List<Resident> residents) {
         this.residents = residents;
     }
     @Override
@@ -32,15 +32,26 @@ public class Residents implements ResidentRepo {
 
     @Override
     public Resident save(Resident repository) {
-        for(Resident resident : residents){
-            if(resident.getId() == repository.getId()){
-                residents.remove(resident);
-                residents.add(repository);
-            }
-            else{
-
-            }
+        if(repository.getId() == 0){
+            repository.setId(this.id ++);
+            residents.add(repository);
+            numberOfResidents += 1;
         }
+
+        else{
+            for(int count = 0; count < residents.size(); count++ ){
+                if(residents.get(count).getId() == repository.getId()) {
+                    delete(residents.get(count).getId());
+                    residents.add(repository);
+
+                }
+            }
+            numberOfResidents += 1;
+
+        }
+
+
+        return repository;
     }
 
     @Override
@@ -75,7 +86,7 @@ public class Residents implements ResidentRepo {
     @Override
     public void deleteByObject(Resident repository) {
         for(int index = 0; index < residents.size(); index++){
-            if(residents.get(index).getId() == repository.getId()){
+            if(residents.get(index).getId() == id){
                 residents.remove(index);
 
             }

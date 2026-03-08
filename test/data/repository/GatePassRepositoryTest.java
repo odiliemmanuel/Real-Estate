@@ -1,7 +1,7 @@
 package data.repository;
 
 import data.models.GatePass;
-import data.repositeries.GatePasses;
+import data.repositeries.GatePassRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 
-public class GatePassTest {
+public class GatePassRepositoryTest {
     List<GatePass> gatePasses;
-    GatePasses gatePass;
+    GatePassRepository gatePass;
 
     GatePass passOne = new GatePass(1, 3, 6);
     GatePass passTwo = new GatePass(3, 7, 9);
@@ -22,7 +22,7 @@ public class GatePassTest {
     @BeforeEach
     public void setup(){
          gatePasses = new ArrayList<>();
-         gatePass = new GatePasses(gatePasses);
+         gatePass = new GatePassRepository(gatePasses);
     }
     @Test
     public void testThatNumberOfGatePasses_IsAtInitialState_0() {

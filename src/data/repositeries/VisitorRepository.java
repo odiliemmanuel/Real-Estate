@@ -1,17 +1,19 @@
 package data.repositeries;
 
-import data.models.Visitor;
 
+import data.models.Resident;
+import data.models.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Visitors implements VisitorRepo {
+public class VisitorRepository implements VisitorRepositoryImpl {
     private List<Visitor> visitors;
     private int id = 1;
     private int numberOfVisitors = 0;
+    private ResidentRepository resident;
 
 
-    public Visitors(List<Visitor> visitors) {
+    public VisitorRepository(List<Visitor> visitors) {
         this.visitors = visitors;
     }
 
@@ -28,6 +30,7 @@ public class Visitors implements VisitorRepo {
            if(visitors.get(count).getId() == newVisitor.getId()){
                visitors.remove(count);
                visitors.add(newVisitor);
+
            }
            numberOfVisitors += 1;
        }
@@ -40,6 +43,26 @@ public class Visitors implements VisitorRepo {
         for(Visitor visitor : visitors) {
             if(visitor.getId() == id){
                 return visitor;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Visitor findByObject(Visitor newVisitor) {
+        for(Visitor visitor : visitors){
+            if(visitor.getId() == newVisitor.getId()){
+                return visitor;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Resident findByResidentId(int id) {
+        for(Resident residents : resident.findAll()){
+            if(residents.getId() == id){
+                return residents;
             }
         }
         return null;
@@ -64,12 +87,22 @@ public class Visitors implements VisitorRepo {
 
     @Override
     public List<Visitor> findAll() {
+
         return new ArrayList<>(visitors);
     }
 
     @Override
     public int count() {
         return numberOfVisitors;
+    }
+
+    @Override
+    public void deleteByResidentId(int id) {
+        for(Resident residents : resident.findAll()){
+            if(residents.getId() == id){
+                visitors.remove(residents);
+            }
+        }
     }
 
 

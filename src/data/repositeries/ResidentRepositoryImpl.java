@@ -1,11 +1,10 @@
 package data.repositeries;
 
 import data.models.Resident;
-import data.models.Visitor;
 
 import java.util.List;
 
-public interface ResidentRepo {
+public interface ResidentRepositoryImpl {
 
     int count();
     Resident findById(int id);
