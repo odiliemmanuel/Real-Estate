@@ -29,6 +29,8 @@ public class ResidentServiceTest {
 
     @Test
     public void testThatIRegisterResident_NumberOfResidentsIncreases(){
+        assertEquals(0, services.getNumberOfResidents());
+
         services.registerResident(repoOne);
         services.registerResident(repoTwo);
         assertEquals(2, services.getNumberOfResidents());
@@ -37,8 +39,12 @@ public class ResidentServiceTest {
 
     @Test
     public void testThatWhileRegisteringResidents_IfResidentTOBeRegisteredAlreadyExist_ErrorIsThrown(){
+        assertEquals(0, services.getNumberOfResidents());
+
         services.registerResident(repoOne);
         services.registerResident(repoTwo);
+        assertEquals(2, services.getNumberOfResidents());
+
         assertThrows(IllegalArgumentException.class,
                 ()->  services.registerResident(repoOne));
 
@@ -47,6 +53,8 @@ public class ResidentServiceTest {
 
     @Test
     public void testThatIRemoveAResident_NumberOfResidentsReduces(){
+        assertEquals(0, services.getNumberOfResidents());
+
         services.registerResident(repoOne);
         services.registerResident(repoTwo);
         services.registerResident(repoThree);
@@ -59,6 +67,8 @@ public class ResidentServiceTest {
 
     @Test
     public void testThatWhileRemovingResidents_IfResidentToBeRemovedDoesNotExist_ErrorIsThrown(){
+        assertEquals(0, services.getNumberOfResidents());
+
         services.registerResident(repoOne);
         services.registerResident(repoTwo);
         services.registerResident(repoThree);
@@ -68,5 +78,34 @@ public class ResidentServiceTest {
                 () -> services.removeResident(4));
 
         assertEquals(3, services.getNumberOfResidents());
+    }
+
+
+    @Test
+    public void testThatICanFindResidentById(){
+        assertEquals(0, services.getNumberOfResidents());
+
+        services.registerResident(repoOne);
+        services.registerResident(repoTwo);
+        services.registerResident(repoThree);
+        assertEquals(3, services.getNumberOfResidents());
+
+        assertEquals("Kamsi", services.getResident(2).getName());
+
+    }
+
+
+    @Test
+    public void testThatWhileSearchingForResident_IfResidentToBeSearchedDoesNotExist_ErrorIsThrown(){
+        assertEquals(0, services.getNumberOfResidents());
+
+        services.registerResident(repoOne);
+        services.registerResident(repoTwo);
+        services.registerResident(repoThree);
+        assertEquals(3, services.getNumberOfResidents());
+
+        assertThrows(IllegalArgumentException.class,
+                () -> services.getResident(5));
+
     }
 }
