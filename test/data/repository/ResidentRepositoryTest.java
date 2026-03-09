@@ -2,7 +2,7 @@ package data.repository;
 
 
 import data.models.Resident;
-import data.repositeries.ResidentRepository;
+import data.repositeries.ResidentRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ResidentRepositoryTest {
     List<Resident> repositories;
-    ResidentRepository repository;
+    ResidentRepositoryImpl repository;
 
     Resident repoOne = new Resident("Odili", "3212", "07046731195");
     Resident repoTwo = new Resident("Kamsi", "2323", "07046731194");
@@ -22,7 +22,7 @@ public class ResidentRepositoryTest {
     @BeforeEach
     public void setup(){
         repositories = new ArrayList<>();
-        repository = new ResidentRepository(repositories);
+        repository = new ResidentRepositoryImpl(repositories);
     }
 
     @Test

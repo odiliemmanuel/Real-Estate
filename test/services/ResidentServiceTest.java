@@ -1,7 +1,7 @@
 package services;
 
 import data.models.Resident;
-import data.repositeries.ResidentRepository;
+import data.repositeries.ResidentRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ResidentServiceTest {
     List<Resident> repositories;
-    ResidentRepository repository;
-    ResidentServiceImpl services;
+    ResidentRepositoryImpl repository;
+    ResidentService services;
 
     Resident repoOne = new Resident("Odili", "3212", "07046731195");
     Resident repoTwo = new Resident("Kamsi", "2323", "07046731194");
@@ -23,8 +23,8 @@ public class ResidentServiceTest {
     @BeforeEach
     public void setup(){
         repositories = new ArrayList<>();
-        repository = new ResidentRepository(repositories);
-        services = new ResidentService(repository);
+        repository = new ResidentRepositoryImpl(repositories);
+        services = new ResidentServiceImpl(repository);
     }
 
     @Test

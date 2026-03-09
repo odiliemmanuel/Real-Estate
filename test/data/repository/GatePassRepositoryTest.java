@@ -62,7 +62,7 @@ public class GatePassRepositoryTest {
         gatePass.save(passThree);
         assertEquals(3, gatePass.count());
 
-        gatePass.delete(1);
+        gatePass.delete(2);
         assertEquals(2, gatePass.count());
 
     }
