@@ -2,6 +2,7 @@ package services;
 
 import data.models.GatePass;
 import data.repositeries.GatePassRepository;
+import data.repositeries.GatePassRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ public class GatePassServiceTest {
     GatePassRepository repository;
     GatePassService services;
 
-    GatePass passOne = new GatePass(1, 3, 6);
-    GatePass passTwo = new GatePass(3, 7, 9);
-    GatePass passThree = new GatePass(4, 8, 10);
+    GatePass passOne = new GatePass("Odili", "000879");
+    GatePass passTwo = new GatePass("Barry", "980766");
+    GatePass passThree = new GatePass("Allen", "787879");
 
     @BeforeEach
     public void setup(){
         gatePasses = new ArrayList<>();
-        repository = new GatePassRepository(gatePasses);
+        repository = new GatePassRepositoryImpl(gatePasses);
         services = new GatePassServiceImpl(repository);
     }
 
@@ -59,13 +60,13 @@ public class GatePassServiceTest {
         services.issueGatePass(passThree);
         assertEquals(3, services.getNumberOfGatePasses());
 
-        services.removeGatePass(4);
+        services.removeGatePass(3);
         assertEquals(2, services.getNumberOfGatePasses());
     }
 
 
     @Test
-    public void testThatWhileRemovingGatePasses_IfGatePassToBeRemovedDoesnt_ErrorIsThrown() {
+    public void testThatWhileRemovingGatePasses_IfGatePassToBeRemovedDoesntExist_ErrorIsThrown() {
         assertEquals(0, services.getNumberOfGatePasses());
 
         services.issueGatePass(passOne);
@@ -78,6 +79,7 @@ public class GatePassServiceTest {
         assertEquals(3, services.getNumberOfGatePasses());
     }
 
+
     @Test
     public void testThatICanFindGatePass_UsingItsId(){
         assertEquals(0, services.getNumberOfGatePasses());
@@ -87,7 +89,7 @@ public class GatePassServiceTest {
         services.issueGatePass(passThree);
         assertEquals(3, services.getNumberOfGatePasses());
 
-        assertEquals(7, services.getGatePass(3).getResidentId());
+        assertEquals(services.getGatePass(3).getId(), passThree.getId());
     }
 
     @Test
@@ -100,7 +102,7 @@ public class GatePassServiceTest {
         assertEquals(3, services.getNumberOfGatePasses());
 
         assertThrows(IllegalArgumentException.class,
-                () -> services.getGatePass(2));
+                () -> services.getGatePass(5));
     }
 
 }

@@ -27,6 +27,7 @@ public class ResidentServiceTest {
         services = new ResidentServiceImpl(repository);
     }
 
+
     @Test
     public void testThatIRegisterResident_NumberOfResidentsIncreases(){
         assertEquals(0, services.getNumberOfResidents());

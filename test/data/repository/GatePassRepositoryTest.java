@@ -2,6 +2,7 @@ package data.repository;
 
 import data.models.GatePass;
 import data.repositeries.GatePassRepository;
+import data.repositeries.GatePassRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -14,21 +15,21 @@ public class GatePassRepositoryTest {
     List<GatePass> gatePasses;
     GatePassRepository gatePass;
 
-    GatePass passOne = new GatePass(1, 3, 6);
-    GatePass passTwo = new GatePass(3, 7, 9);
-    GatePass passThree = new GatePass(4, 8, 10);
+    GatePass passOne = new GatePass("Odili", "07046731194");
+    GatePass passTwo = new GatePass("Flash", "07154436768");
+    GatePass passThree = new GatePass("Barry", "0787775757");
 
 
     @BeforeEach
     public void setup(){
-         gatePasses = new ArrayList<>();
-         gatePass = new GatePassRepository(gatePasses);
+        gatePasses = new ArrayList<>();
+        gatePass = new GatePassRepositoryImpl(gatePasses);
     }
+
     @Test
     public void testThatNumberOfGatePasses_IsAtInitialState_0() {
         assertEquals(0, gatePass.count());
     }
-
 
     @Test
     public void testThatIfISaveGatePass_NumberOfPassesIncreases(){
@@ -44,7 +45,7 @@ public class GatePassRepositoryTest {
     public void testThatIfISaveAGatePass_WithAnIdThatIAlreadyExists_NumberOfPasseRemainsTheSame(){
         assertEquals(0, gatePass.count());
 
-        GatePass gatePassOne = new GatePass(1, 3, 6);
+        GatePass gatePassOne = new GatePass("Odili", "07046731194");
         gatePass.save(gatePassOne);
         gatePass.save(passOne);
         gatePass.save(passTwo);

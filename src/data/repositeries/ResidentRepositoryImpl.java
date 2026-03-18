@@ -15,6 +15,8 @@ public class ResidentRepositoryImpl implements ResidentRepository {
     public ResidentRepositoryImpl(List<Resident> residents) {
         this.residents = residents;
     }
+
+
     @Override
     public int count() {
         return numberOfResidents;

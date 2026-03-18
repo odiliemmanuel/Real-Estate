@@ -24,16 +24,18 @@ public class GatePassRepositoryImpl implements GatePassRepository {
 
     @Override
     public GatePass save(GatePass gatePass) {
-        if(gatePass.getId() == 0){
-            gatePass.setId(this.id ++);
-            gatePasses.add(gatePass);
-            numberOfGatePasses += 1;
-        }
-        else{
-            delete(gatePass.getId());
-            gatePasses.add(gatePass);
-            numberOfGatePasses += 1;
-        }
+       if(findById(gatePass.getId()) != null){
+           delete(gatePass.getId());
+           gatePass.setId(id++);
+           gatePasses.add(gatePass);
+           numberOfGatePasses++;
+           id ++;
+       }
+       else {
+           gatePasses.add(gatePass);
+           numberOfGatePasses++;
+           id ++;
+       }
 
         return gatePass;
     }

@@ -4,17 +4,17 @@ import java.time.LocalDateTime;
 
 public class GatePass {
 
+    private String name;
     private int id;
     private int residentId;
-    private int visitorsId;
     private LocalDateTime startingDate =  LocalDateTime.now();
     private LocalDateTime expirationDate;
     private boolean isActive = true;
 
-    public GatePass(int id, int residentId, int visitorsId) {
+    public GatePass(String name, String phoneNumber) {
         this.id = id;
         this.residentId = residentId;
-        this.visitorsId = visitorsId;
+
 
     }
 
@@ -25,14 +25,6 @@ public class GatePass {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getVisitorsId() {
-        return visitorsId;
-    }
-
-    public void setVisitorsId(int visitorsId) {
-        this.visitorsId = visitorsId;
     }
 
     public int getResidentId() {
